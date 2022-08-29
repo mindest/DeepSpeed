@@ -727,6 +727,8 @@ def _einsum_flops_compute(equation, *operands):
     Count flops for the einsum operation.
     """
     equation = equation.replace(" ", "")
+    if len(operands) == 1 and isinstance(operands[0], (list, tuple)):
+        operands = operands[0]
     input_shapes = [o.shape for o in operands]
 
     # Re-map equation so that same equation with different alphabet
